@@ -6,7 +6,6 @@ import multiprocessing
 from pymongo import MongoClient
 
 def pushLines(lines):
-		global lines
 		data.insert_many(lines)
 
 if __name__ == "__main__":
