@@ -2,6 +2,7 @@ import codecs
 import sys
 import time
 import multiprocessing
+import time
 
 from pymongo import MongoClient
 
@@ -17,9 +18,9 @@ if __name__ == "__main__":
 
 	for line in codecs.open(sys.argv[1], encoding='utf-8', errors='ignore'):
 			try:
-					if len(lines) >= 1000000:
-						print('Pushing 1000000')
-						multiprocessing.Process(target=pushLines, args=[lines]).start()
+					if len(lines) >= 10000000:
+						print('Pushing Normal')
+						pushLines(lines)
 						lines = []
 					email, password = line.strip().rstrip().split(':')
 					lines.append({'username': None, 'password': password, 'email': email, 'database': 'linkedin', 'ip': None})
