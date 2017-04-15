@@ -20,7 +20,7 @@ if __name__ == "__main__":
 			try:
 					if len(lines) >= 1000000:
 						print('Pushing 1000000')
-						multiprocessing.Process(target=pushLines, args=lines).start()
+						multiprocessing.Process(target=pushLines, args=[lines]).start()
 						lines = []
 					email, password = line.strip().rstrip().split(':')
 					lines.append({'username': None, 'password': password, 'email': email, 'database': 'linkedin', 'ip': None})
