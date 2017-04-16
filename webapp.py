@@ -19,7 +19,7 @@ def freesource():
 	#return 'REBUILDING INDEXES, I WANNA SLEEP THO SO WE GO UP TOMORROW IG'
 	lookupData = ''
 	lookup = False
-	opts = {'username': request.args.get('username'), 'email': request.args.get('email'), 'ip': request.args.get('ip')}
+	opts = {'username': request.args.get('username'), 'email': request.args.get('email'), 'ip': request.args.get('ip'), 'password': request.args.get('password')}
 	for key, value in opts.items():
 		if opts[key]:
 			lookup = {'type': key, 'data': opts[key]}
@@ -32,7 +32,7 @@ def freesource():
 			lookupData += "--------------------------------------<br/>"
 			#lookupData += '{0}<br/>\r\n'.format(str(result))
 	else:
-		lookupData = "<p>COCKS IN MY ASSSSSSSSSSSSSS 666</p>"
+		lookupData = "<p>Ready.</p>"
 
 	return render_template('index.html', data=lookupData)
 
