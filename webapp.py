@@ -11,13 +11,12 @@ print('Signed in: {0}'.format(db.authenticate('admin', '.gpe7h+99W:P}gU}')))
 data = db['data']
 
 def doLookup(lookup):
-	print(lookup)
-	res = data.find({lookup['type']: lookup['data']})
-	print(res)
+	res = data.find({"$query": {lookup['type']: lookup['data']}, "$maxTimeMS": 1000})
 	return res
 
 @app.route('/')
 def freesource():
+	#return 'REBUILDING INDEXES, I WANNA SLEEP THO SO WE GO UP TOMORROW IG'
 	lookupData = ''
 	lookup = False
 	opts = {'username': request.args.get('username'), 'email': request.args.get('email'), 'ip': request.args.get('ip')}
@@ -26,14 +25,14 @@ def freesource():
 			lookup = {'type': key, 'data': opts[key]}
 
 	if lookup != False:
+		lookup['data'] = lookup['data']
 		for result in doLookup(lookup):
 			for key, value in result.items():
 				lookupData += '<p>{0}: {1}<br/></p>\r\n'.format(key, value)
+			lookupData += "--------------------------------------<br/>"
 			#lookupData += '{0}<br/>\r\n'.format(str(result))
 	else:
 		lookupData = "<p>COCKS IN MY ASSSSSSSSSSSSSS 666</p>"
-
-	print(lookupData)
 
 	return render_template('index.html', data=lookupData)
 
