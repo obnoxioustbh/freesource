@@ -55,6 +55,6 @@ def freesource():
 	else:
 		lookupData = ""
 
-	return render_template('new_index.htm', data=lookupData)
+	return render_template('new_index.htm', data=lookupData.decode().encode('utf-8'))
 
 #data.insert_one({'username': 'test', 'password': 'testPassword', 'email': 'test@test.com', 'database': 'myspaceTest', 'ip': '127.0.0.1'})
