@@ -53,7 +53,7 @@ def freesource():
 			baseData += table
 			lookupData += baseData
 	else:
-		lookupData = "<p>Ready.</p>"
+		lookupData = ""
 
 	return render_template('new_index.htm', data=lookupData)
 
