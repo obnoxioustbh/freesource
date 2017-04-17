@@ -1,6 +1,8 @@
 import urllib
 import re
 
+from bson.codec_options import CodecOptions
+
 from pymongo import MongoClient
 from flask import Flask
 from flask import render_template
@@ -15,7 +17,7 @@ def tableCreator(ths):
 
 app = Flask(__name__)
 client = MongoClient('mongodb://93.190.142.215', 27017)
-db = client.admin
+db = client.get_database('admin', codec_options=CodecOptions(unicode_decode_error_handler='ignore'))
 print('Signed in: {0}'.format(db.authenticate('admin', '.gpe7h+99W:P}gU}')))
 data = db['data']
 
@@ -55,6 +57,6 @@ def freesource():
 	else:
 		lookupData = ""
 
-	return render_template('new_index.htm', data=lookupData.encode('utf-8'))
+	return render_template('new_index.htm', data=lookupData)
 
 #data.insert_one({'username': 'test', 'password': 'testPassword', 'email': 'test@test.com', 'database': 'myspaceTest', 'ip': '127.0.0.1'})
