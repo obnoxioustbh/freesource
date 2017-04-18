@@ -22,7 +22,7 @@ print('Signed in: {0}'.format(db.authenticate('admin', '.gpe7h+99W:P}gU}')))
 data = db['data']
 
 def doLookup(lookup):
-	res = data.find({"$query": {lookup['type']: lookup['data']}, "$maxTimeMS": 1000}).collation(Collation(locale='en', strength=1))
+	res = data.find({"$query": {lookup['type']: lookup['data']}, "$maxTimeMS": 10000}).collation(Collation(locale='en', strength=1))
 	return res
 
 @app.route('/')
