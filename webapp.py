@@ -2,7 +2,7 @@ import urllib
 import re
 
 from bson.codec_options import CodecOptions
-
+from pymongo.collation import Collation
 from pymongo import MongoClient
 from flask import Flask
 from flask import render_template
@@ -22,7 +22,7 @@ print('Signed in: {0}'.format(db.authenticate('admin', '.gpe7h+99W:P}gU}')))
 data = db['data']
 
 def doLookup(lookup):
-	res = data.find({"$query": {lookup['type']: lookup['data']}, "$maxTimeMS": 1000})
+	res = data.find({"$query": {lookup['type']: lookup['data']}, "$maxTimeMS": 1000}).collation(Collation(locale='en', strength=1))
 	return res
 
 @app.route('/')
